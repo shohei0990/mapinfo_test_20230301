@@ -88,8 +88,11 @@ def Map_info(x):
         return 0, 0
 
 
-df.loc[:, ['経度', '緯度']] = df.apply(lambda x: Map_info(x),
-                                   axis=1, result_type='expand')
+df_info = pd.DataFrame()
+df_info[['経度', '緯度']] = df.apply(lambda x: Map_info(x),
+                                 axis=1, result_type='expand')
+
+df = pd.concat([df, df_info], axis=1)
 
 se90 = st.write(df)
 se91 = st.write(df.shape)
@@ -105,12 +108,12 @@ m = folium.Map(
     zoom_start=10
 )
 
-select_columns_num = ['緯度', '経度']
-pre_df = df[select_columns_num]
+#select_columns_num = ['緯度', '経度']
+#pre_df = df[select_columns_num]
 
-for column in pre_df:
-    pre_df[column] = pd.to_numeric(pre_df[column], errors='coerce')
-df[select_columns_num] = pre_df
+# for column in pre_df:
+#    pre_df[column] = pd.to_numeric(pre_df[column], errors='coerce')
+#df[select_columns_num] = pre_df
 
 # 読み込んだデータ(緯度・経度、ポップアップ用文字、アイコンを表示)
 for i, row in df.iterrows():
