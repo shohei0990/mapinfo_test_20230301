@@ -3,5 +3,4 @@ streamlit_folium
 folium  
 pandas 
 requests
-urllib
-geopy
+urllib3

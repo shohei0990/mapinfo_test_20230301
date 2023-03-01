@@ -6,7 +6,6 @@ import requests
 import urllib
 import json
 from urllib.parse import urlencode
-from geopy.distance import geodesic
 
 # 表示するデータを読み込み2
 df_final = pd.read_csv('realestate_info_finalimage.csv')
