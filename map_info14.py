@@ -210,7 +210,7 @@ with map_col:
     m_data13 = df[df["名称"] == m_data]["経度"].values
     m_data14 = df[df["名称"] == m_data]["緯度"].values
 
-if m_data is not None:
+#if m_data is not None:
     #st.session_state.count1 = m_data13
     #st.session_state.count2 = m_data14
 
