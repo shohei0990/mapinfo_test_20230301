@@ -4,7 +4,6 @@ import folium                               # folium
 import pandas as pd                         # CSVをデータフレームとして読み込む
 import requests
 import urllib
-import json
 from urllib.parse import urlencode
 
 # 表示するデータを読み込み2
@@ -74,7 +73,6 @@ if df_final0.shape[0] > 50:
     df = df_final0[:50]
 else:
     df = df_final0
-
 
 def Map_info(x):
     makeUrl = "https://msearch.gsi.go.jp/address-search/AddressSearch?q="
@@ -174,19 +172,19 @@ for place in places:
 df_cb = df_cb.reset_index()
 home = (lat2, lng2)
 
-for i, row in df_cb.iterrows():
-    # ポップアップの作成(都道府県名＋都道府県庁所在地＋人口＋面積)
-    pop = f"・名称…{row['名称']} <br>・距離[m]…"
-    folium.Marker(
-        # 緯度と経度を指定
-        location=[row['緯度'], row['経度']],
-        # ツールチップの指定(都道府県名)
-        tooltip=row['名称'],
-        # ポップアップの指定
-        popup=folium.Popup(pop, max_width=300),
-        # アイコンの指定(アイコン、色)
-        icon=folium.Icon(icon="bell", icon_color="white", color="blue")
-    ).add_to(m)
+#for i, row in df_cb.iterrows():
+#    # ポップアップの作成(都道府県名＋都道府県庁所在地＋人口＋面積)
+#    pop = f"・名称…{row['名称']} <br>・距離[m]…"
+#    folium.Marker(
+#        # 緯度と経度を指定
+#        location=[row['緯度'], row['経度']],
+#        # ツールチップの指定(都道府県名)
+#        tooltip=row['名称'],
+#        # ポップアップの指定
+#        popup=folium.Popup(pop, max_width=300),
+#        # アイコンの指定(アイコン、色)
+#        icon=folium.Icon(icon="bell", icon_color="white", color="blue")
+#    ).add_to(m)
 
 
 # メイン画面 MAP表示 ＆ 詳細情報
@@ -213,8 +211,8 @@ with map_col:
     m_data14 = df[df["名称"] == m_data]["緯度"].values
 
 if m_data is not None:
-    st.session_state.count1 = m_data13
-    st.session_state.count2 = m_data14
+    #st.session_state.count1 = m_data13
+    #st.session_state.count2 = m_data14
 
 info_col.subheader("物件詳細")
 if m_data is not None:
