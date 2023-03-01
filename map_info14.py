@@ -87,8 +87,7 @@ def Map_info(x):
         return 0, 0
 
 
-df[['経度', '緯度']] = df.apply(lambda x: Map_info(x),
-                            axis=1, result_type='expand')
+df[['経度', '緯度']] = df.apply(lambda x: Map_info(x),axis=1, result_type='expand')
 
 se90 = st.write(df)
 se91 = st.write(df.shape)
@@ -137,40 +136,40 @@ language = 'ja'
 if 'count1' not in st.session_state:
     lat2, lng2 = 35.623516, 139.706985  # m_data13, m_data14
 else:
-    lat2, lng2 = st.session_state.count1, st.session_state.count2
+    lat2, lng2 = 35.623516, 139.706985 #st.session_state.count1, st.session_state.count2
 
 # エンドポイントURL
-places_endpoint = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
-# パラメータ
-params = {
-    "key": api_key,
-    "location": f"{lat2},{lng2}",
-    "radius": radius,
-    "keyword": keyword,
-    "language": language,
-}
+# places_endpoint = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
+# # パラメータ
+# params = {
+#     "key": api_key,
+#     "location": f"{lat2},{lng2}",
+#     "radius": radius,
+#     "keyword": keyword,
+#     "language": language,
+# }
 
-# URLエンコード, リクエストURL生成
-params_encoded = urlencode(params)
-places_url = f"{places_endpoint}?{params_encoded}"
+# # URLエンコード, リクエストURL生成
+# params_encoded = urlencode(params)
+# places_url = f"{places_endpoint}?{params_encoded}"
 
-# 結果取得
-r = requests.get(places_url)
-data = r.json()
+# # 結果取得
+# r = requests.get(places_url)
+# data = r.json()
 
-# APIレスポンスを取得
-places = r.json()["results"]
-df_cb = pd.DataFrame(columns=['名称', '住所', '緯度', '経度'])
+# # APIレスポンスを取得
+# places = r.json()["results"]
+# df_cb = pd.DataFrame(columns=['名称', '住所', '緯度', '経度'])
 
-# 各コンビニの位置情報を表示
-for place in places:
-    temp = pd.DataFrame(data=[[place["name"], place["vicinity"], round(place["geometry"]["location"]["lat"], 7), round(
-        place["geometry"]["location"]["lng"], 7)]], columns=df_cb.columns)
-    df_cb = pd.concat([df_cb, temp])
-    print("名称:", place["name"])
+# # 各コンビニの位置情報を表示
+# for place in places:
+#     temp = pd.DataFrame(data=[[place["name"], place["vicinity"], round(place["geometry"]["location"]["lat"], 7), round(
+#         place["geometry"]["location"]["lng"], 7)]], columns=df_cb.columns)
+#     df_cb = pd.concat([df_cb, temp])
+#     print("名称:", place["name"])
 
-df_cb = df_cb.reset_index()
-home = (lat2, lng2)
+# df_cb = df_cb.reset_index()
+# home = (lat2, lng2)
 
 #for i, row in df_cb.iterrows():
 #    # ポップアップの作成(都道府県名＋都道府県庁所在地＋人口＋面積)
