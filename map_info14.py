@@ -74,6 +74,7 @@ if df_final0.shape[0] > 50:
 else:
     df = df_final0
 
+
 def Map_info(x):
     makeUrl = "https://msearch.gsi.go.jp/address-search/AddressSearch?q="
     s_quote = urllib.parse.quote(x['アドレス'])
@@ -87,7 +88,8 @@ def Map_info(x):
         return 0, 0
 
 
-df[['経度', '緯度']] = df.apply(lambda x: Map_info(x),axis=1, result_type='expand')
+df[['経度', '緯度']] = df.apply(lambda x: Map_info(x),
+                            axis=1, result_type='expand')
 
 se90 = st.write(df)
 se91 = st.write(df.shape)
@@ -136,7 +138,8 @@ language = 'ja'
 if 'count1' not in st.session_state:
     lat2, lng2 = 35.623516, 139.706985  # m_data13, m_data14
 else:
-    lat2, lng2 = 35.623516, 139.706985 #st.session_state.count1, st.session_state.count2
+    # st.session_state.count1, st.session_state.count2
+    lat2, lng2 = 35.623516, 139.706985
 
 # エンドポイントURL
 # places_endpoint = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
@@ -171,7 +174,7 @@ else:
 # df_cb = df_cb.reset_index()
 # home = (lat2, lng2)
 
-#for i, row in df_cb.iterrows():
+# for i, row in df_cb.iterrows():
 #    # ポップアップの作成(都道府県名＋都道府県庁所在地＋人口＋面積)
 #    pop = f"・名称…{row['名称']} <br>・距離[m]…"
 #    folium.Marker(
@@ -209,7 +212,7 @@ with map_col:
     m_data13 = df[df["名称"] == m_data]["経度"].values
     m_data14 = df[df["名称"] == m_data]["緯度"].values
 
-#if m_data is not None:
+# if m_data is not None:
     #st.session_state.count1 = m_data13
     #st.session_state.count2 = m_data14
 
