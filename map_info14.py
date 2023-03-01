@@ -88,8 +88,8 @@ def Map_info(x):
         return 0, 0
 
 
-df[['経度', '緯度']] = df.apply(lambda x: Map_info(x),
-                            axis=1, result_type='expand')
+df.loc[:, ['経度', '緯度']] = df.apply(lambda x: Map_info(x),
+                                   axis=1, result_type='expand')
 
 se90 = st.write(df)
 se91 = st.write(df.shape)
